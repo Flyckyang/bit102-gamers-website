@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources - Gamers Hub</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+<style>
+body{margin:0;}
+.card-img-top{height:180px;object-fit:cover;}
+</style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+<a class="navbar-brand fw-bold" href="index.html">Gamers Hub</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navMenu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="forum.html">Forum</a></li>
+<li class="nav-item"><a class="nav-link active" href="resources.html">Resources</a></li>
+<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<header class="py-4 bg-light border-bottom">
+<div class="container">
+<h1 class="h3 mb-1">Game Resources</h1>
+<p class="text-muted mb-0">Guides, tools and updates for gamers. Click "View" to see details.</p>
+</div>
+</header>
+
+<main class="container my-5 flex-grow-1">
+
+<div class="d-flex flex-wrap gap-2 mb-4">
+<button class="btn btn-outline-dark btn-sm filter-btn" data-filter="all">All</button>
+<button class="btn btn-outline-dark btn-sm filter-btn" data-filter="FPS">FPS</button>
+<button class="btn btn-outline-dark btn-sm filter-btn" data-filter="RPG">RPG</button>
+<button class="btn btn-outline-dark btn-sm filter-btn" data-filter="MOBA">MOBA</button>
+</div>
+
+<div class="row g-4" id="resourcesGrid">
+
+<div class="col-12 col-md-6 col-lg-4 resource-card" data-category="FPS">
+<div class="card h-100">
+<img src="Valorant.jpg" class="card-img-top">
+<div class="card-body">
+<span class="badge bg-secondary">FPS</span>
+<h5 class="card-title mt-2">Valorant Aim Guide</h5>
+<p class="card-text">Short drills to improve aim and crosshair placement.</p>
+<button class="btn btn-primary btn-sm view-btn"
+data-title="Valorant Aim Guide"
+data-body="Practice tracking and flick shots daily to improve accuracy.">
+View
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4 resource-card" data-category="RPG">
+<div class="card h-100">
+<img src="Genshin.jpg" class="card-img-top">
+<div class="card-body">
+<span class="badge bg-secondary">RPG</span>
+<h5 class="card-title mt-2">Genshin Team Building Tips</h5>
+<p class="card-text">How to build balanced teams using elemental synergy.</p>
+<button class="btn btn-primary btn-sm view-btn"
+data-title="Genshin Team Building Tips"
+data-body="Use one main DPS with support characters for balance.">
+View
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4 resource-card" data-category="MOBA">
+<div class="card h-100">
+<img src="Dota2.jpg" class="card-img-top">
+<div class="card-body">
+<span class="badge bg-secondary">MOBA</span>
+<h5 class="card-title mt-2">Dota 2 Ward Spots</h5>
+<p class="card-text">Vision control basics: where and when to ward.</p>
+<button class="btn btn-primary btn-sm view-btn"
+data-title="Dota 2 Ward Spots"
+data-body="Place wards near objectives to control map vision.">
+View
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4 resource-card" data-category="FPS">
+<div class="card h-100">
+<img src="FPS Gaming.jpg" class="card-img-top">
+<div class="card-body">
+<span class="badge bg-secondary">FPS</span>
+<h5 class="card-title mt-2">FPS Settings Checklist</h5>
+<p class="card-text">Basic setup: sensitivity, crosshair, audio.</p>
+<button class="btn btn-primary btn-sm view-btn"
+data-title="FPS Settings Checklist"
+data-body="Adjust sensitivity and graphics settings for better performance.">
+View
+</button>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-lg-4 resource-card" data-category="RPG">
+<div class="card h-100">
+<img src="Elden.jpg" class="card-img-top">
+<div class="card-body">
+<span class="badge bg-secondary">RPG</span>
+<h5 class="card-title mt-2">Quest Planning Tips</h5>
+<p class="card-text">Plan quest order to save time and avoid missing rewards.</p>
+<button class="btn btn-primary btn-sm view-btn"
+data-title="Quest Planning Tips"
+data-body="Focus on main quests first then side quests.">
+View
+</button>
+</div>
+</div>
+</div>
+
+</div>
+</main>
+
+<footer class="bg-dark text-light text-center py-3 mt-auto">
+<small>© 2026 Gamers Hub • BIT102 Assignment 1</small>
+</footer>
+
+<div class="modal fade" id="resourceModal" tabindex="-1">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="modalTitle">Resource</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body" id="modalBody"></div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const modal=new bootstrap.Modal(document.getElementById('resourceModal'));
+
+document.addEventListener('click',(e)=>{
+const btn=e.target.closest('.view-btn');
+if(!btn)return;
+
+document.getElementById('modalTitle').textContent=btn.dataset.title;
+document.getElementById('modalBody').textContent=btn.dataset.body;
+modal.show();
+});
+
+document.querySelectorAll('.filter-btn').forEach((b)=>{
+b.addEventListener('click',()=>{
+const filter=b.dataset.filter;
+document.querySelectorAll('.resource-card').forEach((card)=>{
+const match=(filter==='all')||(card.dataset.category===filter);
+card.style.display=match?'':'none';
+});
+});
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - Gamers Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #f8f9fa; 
+            margin: 0;
+        }
+
+       .forum-header {
+            background: #212529; 
+            color: white;
+            padding: 40px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 2px solid #000000; 
+        }
+
+        .post-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: 6px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .post-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,.08);
+            border-color: #86b7fe;
+            transform: translateY(-2px);
+        }
+        .post-title { font-weight: 600; color: #0d6efd; text-decoration: none; }
+        .post-title:hover { text-decoration: underline; }
+        
+        .badge-general { background-color: #6c757d; }
+        .badge-guides { background-color: #198754; }
+        .badge-lfg { background-color: #fd7e14; }
+        .badge-support { background-color: #dc3545; }
+
+        .search-input { background: #ffffff; border: 1px solid #ced4da; color: #212529; max-width: 250px;}
+        .search-input::placeholder { color: #6c757d; }
+        .search-input:focus { outline: none; border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25); }
+
+        /* 修复 1：移动端滚动条隐藏优化，让横向滑动更美观 */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">Gamers Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="forum.html">Forum</a></li>
+            <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+            <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4 flex-grow-1">
+        <div class="forum-header text-center shadow-sm">
+            <h1 class="fw-bold">Gamers Community</h1>
+            <p class="mb-0">Join the discussion, find teammates, and share your gaming experiences.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                    
+                    <ul class="nav nav-tabs border-bottom-0 flex-nowrap overflow-x-auto hide-scrollbar" style="white-space: nowrap;" id="categoryTabs">
+                        <li class="nav-item"><a class="nav-link active" href="#" onclick="filterPosts('all', this); return false;">All Discussions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="filterPosts('general', this); return false;">General Discussion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="filterPosts('guides', this); return false;">Guides & Tips</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="filterPosts('lfg', this); return false;">LFG</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" onclick="filterPosts('support', this); return false;">Tech Support</a></li>
+                    </ul>
+
+                    <input class="form-control search-input btn-sm" type="search" id="forumSearch" placeholder="Search topics..." onkeyup="searchPosts()">
+                </div>
+
+                <div id="postsContainer" class="d-flex flex-column gap-3"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-light text-center py-3 mt-auto" style="background-color: #212529;">
+        <small>© 2026 Gamers Hub • BIT102 Assignment 1</small>
+    </footer>
+
+    <div class="modal fade" id="postModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="modal-title fw-bold text-primary" id="modalPostTitle">Post Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-2">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span id="modalPostCategory" class="badge bg-secondary text-uppercase">CATEGORY</span>
+                        <small class="text-muted">Posted by <span id="modalPostAuthor" class="fw-bold text-dark">Author</span></small>
+                    </div>
+                    <p id="modalPostContent" class="fs-6" style="line-height: 1.6;"></p>
+                    <hr>
+                    <div class="text-muted small">
+                        <span id="modalPostReplies" class="fw-bold">0</span> Replies • <span id="modalPostViews" class="fw-bold">0</span> Views
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Reply to Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const forumPosts = [
+            { id: 1, category: 'general', title: 'What is your Game of the Year so far?', author: 'PixelHunter', replies: 142, views: '1.2k', time: '2 hours ago', content: 'We are halfway through the year! I have been playing a lot of RPGs recently, but I want to know what everyone else thinks. What is your GOTY so far and why?' },
+            { id: 2, category: 'guides', title: 'Baldur\'s Gate 3: Ultimate Beginner Guide', author: 'RPG_Master', replies: 89, views: '3.4k', time: '5 hours ago', content: 'Starting BG3 can be overwhelming. Here is my ultimate guide: 1. Always use quicksave (F5). 2. Do not ignore your companions\' quests. 3. High ground gives you an advantage in combat. Let me know if you need more tips!' },
+            { id: 3, category: 'lfg', title: 'Looking for a competitive team in Valorant (Gold/Platinum)', author: 'AimBot99', replies: 12, views: '150', time: '10 minutes ago', content: 'I usually play Controller (Omen/Viper) or Sentinel (Cypher). Looking for a non-toxic team to climb to Diamond this act. I play on AP servers. Add my Riot ID below if interested!' },
+            { id: 4, category: 'support', title: 'Game crashing after latest Windows update?', author: 'TechNoob', replies: 34, views: '500', time: '1 day ago', content: 'Ever since Windows updated yesterday, every time I launch my games through Steam, it crashes to the desktop without an error code. Has anyone else experienced this?' },
+            { id: 5, category: 'general', title: 'Unpopular opinion: Open world games are getting boring', author: 'RetroGamer', replies: 256, views: '4.1k', time: '2 days ago', content: 'Is it just me, or do most modern open-world games feel like a checklist of boring chores? I miss linear games with tightly crafted stories instead of huge empty maps.' },
+            { id: 6, category: 'guides', title: 'Elden Ring: How to beat Malenia easily', author: 'LetMeSoloHer', replies: 410, views: '10k', time: '3 days ago', content: 'Malenia is tough, but using a weapon with blood loss buildup (like Rivers of Blood) makes the fight much easier. Also, dodge INTO her attacks, not away from them. Good luck Tarnished!' },
+            { id: 7, category: 'lfg', title: 'Need 2 more players for Destiny 2 Raid tonight!', author: 'StarLord', replies: 5, views: '80', time: '1 hour ago', content: 'We are planning to do the Root of Nightmares raid tonight at 8 PM EST. We need two more players, preferably with Warlock wells. Mic required. Beginners welcome!' },
+            { id: 8, category: 'support', title: 'Controller not connecting to Steam on Mac', author: 'AppleGamer', replies: 8, views: '210', time: '4 hours ago', content: 'I am trying to use my PS5 DualSense controller on my Mac M1 via Bluetooth. My Mac recognizes it, but Steam doesn\'t detect any inputs. Any fix?' }
+        ];
+
+        function getBadgeClass(category) {
+            switch(category) {
+                case 'general': return 'badge-general';
+                case 'guides': return 'badge-guides';
+                case 'lfg': return 'badge-lfg';
+                case 'support': return 'badge-support';
+                default: return 'bg-secondary';
+            }
+        }
+
+        function renderPosts(posts) {
+            const container = document.getElementById('postsContainer');
+            if (posts.length === 0) {
+                container.innerHTML = '<div class="alert alert-light text-center py-5 border">No posts found in this category.</div>';
+                return;
+            }
+
+            container.innerHTML = posts.map(post => `
+                <div class="post-card p-3 shadow-sm d-flex justify-content-between align-items-center flex-wrap gap-3" onclick="openPostModal(${post.id})">
+                    <div class="d-flex flex-column gap-1 flex-grow-1">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge ${getBadgeClass(post.category)} text-uppercase" style="font-size: 0.7rem;">${post.category}</span>
+                            <span class="post-title mb-0 fs-5">${post.title}</span>
+                        </div>
+                        <small class="text-muted">Posted by <span class="fw-bold text-dark">${post.author}</span> • ${post.time}</small>
+                    </div>
+                    <div class="d-flex gap-4 text-center text-muted small">
+                        <div><div class="fw-bold text-dark fs-6">${post.replies}</div><div>Replies</div></div>
+                        <div><div class="fw-bold text-dark fs-6">${post.views}</div><div>Views</div></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterPosts(category, element) {
+            document.querySelectorAll('#categoryTabs .nav-link').forEach(tab => tab.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            const filtered = category === 'all' ? forumPosts : forumPosts.filter(p => p.category === category);
+            renderPosts(filtered);
+        }
+
+        function searchPosts() {
+            const query = document.getElementById('forumSearch').value.toLowerCase();
+            const filtered = forumPosts.filter(p => p.title.toLowerCase().includes(query) || p.author.toLowerCase().includes(query));
+            document.querySelectorAll('#categoryTabs .nav-link').forEach(tab => tab.classList.remove('active'));
+            renderPosts(filtered);
+        }
+
+        let postModal; 
+        function openPostModal(id) {
+            const post = forumPosts.find(p => p.id === id);
+            if(!post) return;
+
+            document.getElementById('modalPostTitle').innerText = post.title;
+            document.getElementById('modalPostAuthor').innerText = post.author;
+            document.getElementById('modalPostContent').innerText = post.content;
+            document.getElementById('modalPostReplies').innerText = post.replies;
+            document.getElementById('modalPostViews').innerText = post.views;
+            
+            const badge = document.getElementById('modalPostCategory');
+            badge.className = `badge ${getBadgeClass(post.category)} text-uppercase`;
+            badge.innerText = post.category;
+
+            if(!postModal) postModal = new bootstrap.Modal(document.getElementById('postModal'));
+            postModal.show();
+        }
+
+        window.onload = () => renderPosts(forumPosts);
+    </script>
+</body>
+</html>

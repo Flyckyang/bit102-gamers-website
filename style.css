@@ -1,0 +1,288 @@
+/* Gamers Hub — Assignment 1 site stylesheet (used by .html and .php pages) */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1419;
+  color: #e7e9ea;
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: #5eead4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ----- Header & navigation ----- */
+.site-header {
+  background-color: #1a2332;
+  border-bottom: 2px solid #2d3a4d;
+  padding: 1rem 1.5rem;
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+.site-header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.site-header nav a {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.site-header nav a:hover {
+  color: #5eead4;
+}
+
+/* ----- Main content ----- */
+.page-main {
+  flex: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  width: 100%;
+}
+
+.page-main--wide {
+  max-width: 960px;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #ffffff;
+}
+
+.page-intro,
+.lead {
+  color: #94a3b8;
+  margin: 0 0 1.5rem;
+}
+
+.top-links {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ----- Profile form ----- */
+.profile-card {
+  background-color: #1a2332;
+  border: 1px solid #2d3a4d;
+  border-radius: 10px;
+  padding: 1.5rem 1.75rem;
+}
+
+.profile-form .field {
+  margin-bottom: 1.15rem;
+}
+
+.profile-form label {
+  display: block;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-bottom: 0.35rem;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="password"],
+.profile-form input[type="email"],
+.profile-form input[type="tel"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  background-color: #0f1419;
+  color: #e7e9ea;
+  font-size: 1rem;
+}
+
+.profile-form input:focus {
+  outline: 2px solid #2dd4bf;
+  outline-offset: 1px;
+  border-color: #2dd4bf;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0.35rem 0 0;
+}
+
+.btn-submit,
+.btn-primary {
+  margin-top: 0.25rem;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  color: #0f1419;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-submit:hover,
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+/* ----- Content panels (home, forum, resources) ----- */
+.content-block {
+  background-color: #1a2332;
+  border: 1px solid #2d3a4d;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.content-block h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+  color: #5eead4;
+}
+
+/* ----- PHP alerts ----- */
+.msg {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.msg-success {
+  background: rgba(20, 184, 166, 0.15);
+  border: 1px solid #14b8a6;
+  color: #99f6e4;
+}
+
+.msg-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid #ef4444;
+  color: #fecaca;
+}
+
+.msg-error ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+/* ----- Users table ----- */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #2d3a4d;
+}
+
+th {
+  background: #141c28;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+tr:hover td {
+  background: rgba(45, 212, 191, 0.04);
+}
+
+.actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background: #334155;
+  color: #e7e9ea;
+}
+
+.btn-secondary:hover {
+  background: #475569;
+  color: #fff;
+}
+
+.btn-danger {
+  background: #b91c1c;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #991b1b;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+}
+
+/* ----- Footer ----- */
+.site-footer {
+  background-color: #1a2332;
+  border-top: 2px solid #2d3a4d;
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
